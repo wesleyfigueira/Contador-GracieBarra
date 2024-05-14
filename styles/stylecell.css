@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+h1,h2,h3{
+    font-family:"bebas Neue" ;
+}
+.text{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.imagetext{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.contador{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.nomesAndValue{
+    text-align: center;
+    margin: 3px;
+}
+.todosbuttons{
+    text-align: center;
+}
+button{
+    border-radius: 10px;
+    border: solid 1px black;
+    margin: 3px;
+    padding: 5px;
+    width: 30px;
+    background-color: white;
+}
+
+
+    
+    
+
+
