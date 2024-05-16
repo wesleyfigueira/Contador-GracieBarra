@@ -3,7 +3,7 @@ const values = document.getElementById("value");
 const plusMore2 = document.getElementById("plusMore2"); 
 const plusMore3 = document.getElementById("plusMore3"); 
 const plusMore4 = document.getElementById("plusMore4"); 
-const reset = document.getElementById("reset"); 
+const reset = document.getElementById("resete"); 
 
 const values2 = document.getElementById("value2"); 
 const plusMore22 = document.getElementById("2plusMore2"); 
@@ -76,3 +76,73 @@ reset2.addEventListener("click", resetButton2);
 /*-------------fim contadorr---------------------- */
 
 
+const timerEl = document.getElementById("timer");
+const marksList = document.getElementById("marks-list");
+
+let intervalId =0;
+let timer = 0;
+let marks = [];
+
+
+const formatTime =(time) =>{
+    
+    const minutes = Math.floor((time % 360000)/6000);
+    const seconds = Math.floor((time % 6000)/ 100);
+    
+
+    return ` ${minutes.toString().padStart(2,"0")}:${seconds.toString().padStart(2,"0")}`
+
+}
+
+const toggleTimer =() =>{
+    const button =document.getElementById("power");
+    const action = button.getAttribute("action");
+
+    clearInterval(intervalId);
+
+    if (action == "start" || action =="continue"){
+        intervalId = setInterval(() =>{
+            timer+=1;
+            setTimer(timer);
+        },10)
+        button.setAttribute("action","pause");
+        button.innerHTML = "<i class='fa-solid fa-pause'><i>";
+    }else if (action =="pause"){
+        button.setAttribute("action","continue");
+        button.innerHTML = '<i class="fa-solid fa-play"></i>'
+    }
+}
+
+const setTimer =(time) => {
+    timerEl.innerText = formatTime(time);
+}
+
+document.getElementById("power").addEventListener("click",toggleTimer);
+
+
+/*-------Marcar parada ---------*/
+
+const addMarkToList = (markIndex,markTime) =>{
+    marksList.innerHTML +=`<h3>Finalizado ${markIndex}</h3><p> ${formatTime(markTime)}</p>`
+}
+const markTime =()=>{
+    marks.push(timer);
+    addMarkToList(marks.length , timer);
+}
+
+document.getElementById("mark").addEventListener("click",markTime);
+
+/*---------resetar tempo---------*/
+const resetTimer =() =>{
+    clearInterval(intervalId);
+    timer = 0;
+    marks= [];
+    setTimer(timer);
+    marksList.innerHTML = "";
+    const button = document.getElementById("power");
+    button.setAttribute("action","start");
+    button.innerHTML = '<i class="fa-solid fa-play"></i>';
+
+
+}
+document.getElementById("reset").addEventListener("click",resetTimer);
